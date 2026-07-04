@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 380px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 16px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    h3 {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .scan-animation {
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      text-align: center;
+    }
+    .scanner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e0e0e0;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .pulse {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #4CAF50;
+      border-radius: 50%;
+      animation: pulse 1.5s ease infinite;
+      margin-left: 8px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .metric-label { color: #666; font-size: 13px; }
+    .metric-value { font-weight: bold; color: #333; }
+    .alert-item {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    button:hover { background: #5a67d8; }
+    .risk-low { color: #4CAF50; }
+    .risk-med { color: #ff9800; }
+    .risk-high { color: #f44336; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h3>
+      🛡️ Security Monitor
+      <span class="pulse"></span>
+    </h3>
+    <p style="font-size: 12px; color: #666;">Real-time protection active</p>
+
+    <!-- Live Scanning Animation -->
+    <div class="scan-animation" id="scanSection">
+      <div class="scanner"></div>
+      <p style="margin-top: 12px; font-size: 13px; color: #666;" id="scanStatus">
+        🔍 Monitoring your browsing...
+      </p>
+    </div>
+
+    <!-- Stats Section (updates live) -->
+    <div class="metric">
+      <span class="metric-label">🛡️ Total Threats Blocked</span>
+      <span class="metric-value" id="totalAlerts">0</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">📊 Avg Risk Score</span>
+      <span class="metric-value" id="avgRisk">0</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">🟢 Current Site Status</span>
+      <span class="metric-value" id="siteStatus">Checking...</span>
+    </div>
+
+    <!-- Alerts Section -->
+    <div id="alertsList"></div>
+
+    <button id="refreshBtn">⟳ Refresh Security Status</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
