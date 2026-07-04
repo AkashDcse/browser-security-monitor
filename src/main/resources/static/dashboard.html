@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        canvas { max-height: 300px; }
+        button { background: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🛡️ Security Monitor Dashboard</h1>
+    <button onclick="downloadCsv()">📥 Export Alerts CSV</button>
+</div>
+<div class="card">
+    <h3>Weekly Threat Activity</h3>
+    <canvas id="weeklyChart"></canvas>
+</div>
+<div class="card">
+    <h3>Top Dangerous Domains</h3>
+    <div id="topDomains">Loading...</div>
+</div>
+<script>
+    async function loadDashboard() {
+        const res = await fetch('/api/dashboard/stats/weekly');
+        const data = await res.json();
+        // Render chart
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        const labels = data.weeklyData.map(d => d.date);
+        const dangerous = data.weeklyData.map(d => d.dangerous_count);
+        new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: 'Dangerous Sites', data: dangerous, borderColor: 'red' }] } });
+        // Render top domains
+        let html = '<table><tr><th>Domain</th><th>Count</th></tr>';
+        data.topDomains.forEach(d => html += `<tr><td>${d.domain}</td><td>${d.count}</td></tr>`);
+        html += '</table>';
+        document.getElementById('topDomains').innerHTML = html;
+    }
+    function downloadCsv() { window.location.href = '/api/dashboard/export/csv'; }
+    loadDashboard();
+</script>
+</body>
+</html>
