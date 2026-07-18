@@ -386,32 +386,6 @@ If this project helped you, please ⭐ star this repository!
 
 **Built with ❤️ by Akash D**
 
----
 
-## 📌 Interview Talking Points
 
-When a recruiter asks about this project, say:
 
-> *"I built an enterprise-grade browser security solution from scratch. It includes real-time URL threat detection using a 6-rule engine with risk scoring, an executive dashboard with Chart.js visualizations, CSV export for compliance, DLP monitoring for copy/paste and file uploads, and extension inventory tracking. What makes it unique is that everything runs locally—no cloud APIs, no data leaving the user's machine—making it privacy-first and zero-cost. The project is built with Spring Boot, Java 21, and Chrome Extension API."*
-
----
-
-### 📝 Keywords for Resume
-
-Add these keywords to your resume:
-- Spring Boot, Java 21, SQLite
-- Chrome Extension API, JavaScript
-- Real-time Threat Detection
-- Risk Scoring Engine
-- REST API Development
-- Data Loss Prevention (DLP)
-- Executive Dashboard, Chart.js
-- Enterprise Security, Phishing Detection
-- Privacy-First Architecture
-- Maven, RESTful Web Services
-- Browser Extension Development
-- SQLite Database, JSON, Gson
-
----
-
-**Built with ❤️ by [Your Name]**
